@@ -1,0 +1,45 @@
+variant: base   # base | norm_in | nondim | full
+data:
+  temperature_path: data/temperature.txt
+  mesh_path: data/mesh.csv
+  has_header: false
+  N_time_use: 25
+  dt: 0.1
+  N_data_nodes: 500
+  N_f_interior: 10000
+  N_b_per_face: 2000
+  N_ic: 4000
+physics:
+  k: 50.0
+  rho: 1200.0
+  Cp: 100.0
+  h: 750.0
+  T_inf: 300.0
+  qpp: 15000.0
+  Ti: 300.0
+domain:
+  Lx: 0.1
+  Lz: 0.1
+  x_left: -0.05
+  x_right: 0.05
+  z_bottom: 0.0
+  z_top: 0.1
+time:
+  t_min: 0.0
+  t_max: 60.0
+train:
+  nneurons: 64
+  nlayers_hidden: 8
+  act: tanh
+  n_iter_adam: 20000
+  lr_adam: 5e-4
+  n_iter_lbfgs: 5000
+  lr_lbfgs: 1e-2
+loss:
+  w_data: 1.0
+  w_pde: 1.0
+  w_bc: 1.0
+  w_ic: 1.0
+  adaptive: false
+artifacts:
+  out_dir: models/base
